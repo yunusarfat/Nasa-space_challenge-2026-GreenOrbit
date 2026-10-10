@@ -1,38 +1,88 @@
-# Field Shift (Frontend Demo)
+# GreenOrbit
 
-NASA Space Apps Challenge 2026 | Challenge: **Field Shift: Adapting Farms with NASA Data**
+**NASA data turned into clear farming decisions.**
 
-A frontend-only prototype of the first two features of our full project:
+GreenOrbit helps farmers choose crop rotations that stay productive in a changing climate. Pin a farm on the map, and the app loads real NASA climate history for that location, then ranks crop rotation plans based on what the farmer values most: saving water, profit, or soil health.
 
-1. **Location picker + NASA climate history.** Click anywhere on the map (or use a quick pick) and the app fetches 10 years of monthly **temperature, rainfall and solar radiation** from the **NASA POWER API**, then shows trends and charts.
-2. **Crop rotation suggestions.** Rotations are ranked for that location from its real climate, using the farmer's priorities (save water, profit, soil health) and an optional future-warming slider.
+Built by team **GreenOrbit** for the **NASA Space Apps Challenge 2026**.
+Challenge: *Field Shift: Adapting Farms with NASA Data*.
 
-No backend and no API key. The browser calls NASA POWER directly.
+---
 
-## Run it
+## Features
+
+- **Interactive map.** Click anywhere, or use quick picks for Bangladeshi locations such as Dhaka, Chattogram, Rajshahi, Khulna, and Sylhet.
+- **Live NASA climate data.** Ten years (2015 to 2024) of monthly temperature, rainfall, and solar radiation from the NASA POWER API, with trend indicators.
+- **Charts.** Monthly temperature and annual rainfall at a glance.
+- **Rotation ranking.** The top three crop rotations for the selected location, scored from its real climate.
+- **Farmer priorities.** Sliders for water saving, profit, and soil health re-rank the plans instantly.
+- **Future warming option.** Add up to +4 °C to see how the best rotation changes.
+
+## Data source
+
+| Dataset | Variables | Access |
+|---|---|---|
+| [NASA POWER](https://power.larc.nasa.gov/docs/services/api/) | `T2M`, `PRECTOTCORR`, `ALLSKY_SFC_SW_DWN` (monthly) | Free API, no key needed |
+
+Map tiles come from OpenStreetMap.
+
+## Tech stack
+
+React, Vite, Tailwind CSS, Leaflet (map), and Recharts (charts). It is frontend only: the browser calls the NASA POWER API directly, with no backend.
+
+## Getting started
+
+You need [Node.js](https://nodejs.org) 20 or newer.
 
 ```bash
+git clone https://github.com/YOUR-USERNAME/YOUR-REPO.git
+cd YOUR-REPO
 npm install
 npm run dev
 ```
 
-Open the local URL that Vite prints.
+Then open the local address that Vite prints (usually `http://localhost:5173`).
 
-## Stack
+To create a production build:
 
-React, Vite, Tailwind CSS, Leaflet (map), Recharts (charts).
+```bash
+npm run build
+npm run preview
+```
 
-## Data
+## Project structure
 
-- **NASA POWER** (`T2M`, `PRECTOTCORR`, `ALLSKY_SFC_SW_DWN`), monthly, 2015 to 2024.
-  https://power.larc.nasa.gov/docs/services/api/
+```
+src/
+  App.jsx                      Page layout, location state, NASA data loading
+  lib/
+    power.js                   NASA POWER API client and climate summaries
+    rotation.js                Crop data and rotation scoring
+  components/
+    MapPicker.jsx              Interactive Leaflet map
+    ClimatePanel.jsx           Stat tiles and charts
+    RotationPanel.jsx          Priority sliders and ranked rotations
+```
 
-## Honest limits
 
-- NASA POWER is regional-scale data (about 50 km grid), not field-level precision.
-- The crop values and scoring in `src/lib/rotation.js` are illustrative rule-based heuristics, not agronomic advice.
-- Seasons are set for South Asia (monsoon, cool season, hot pre-monsoon), so results are most meaningful for Bangladesh and nearby regions.
 
-## Full project roadmap
+## Roadmap
 
-SMAP soil moisture, MODIS NDVI, GPM drought/flood risk, a 10-year rotation simulator, NEX-GDDP climate stress tests, NISAR radar, and an AI advisor in Bangla/English.
+- NASA SMAP soil moisture trends
+- MODIS NDVI crop-health history
+- GPM IMERG drought and flood risk
+- Multi-year rotation simulator
+- NEX-GDDP-CMIP6 climate stress testing
+- NISAR radar integration
+- Bangla and English AI advisor
+
+## Team
+
+**GreenOrbit**
+
+- **Mohammad Arfat**: machine learning and full-stack development
+- **Mizbahul Ali Minhaz**: backend
+
+## Acknowledgements
+
+Climate data courtesy of the NASA Langley Research Center POWER Project. Map data &copy; OpenStreetMap contributors.
