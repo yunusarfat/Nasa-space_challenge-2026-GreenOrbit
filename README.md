@@ -82,7 +82,3 @@ src/
 
 - **Mohammad Arfat**: machine learning and full-stack development
 - **Mizbahul Ali Minhaz**: backend
-
-## Acknowledgements
-
-Climate data courtesy of the NASA Langley Research Center POWER Project. Map data &copy; OpenStreetMap contributors.
